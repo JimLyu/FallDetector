@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">跌倒偵測</string>
+    <string name="title_activity_sqlite">SQLiteActivity</string>
+    <string name="title_activity_settings">設定</string>
+    <string name="blank"/>
+    <string name="user">使用者：</string>
+    <string name="disconnecting">未連接</string>
+    <string name="connected">已連接</string>
+    <string name="connect">連接</string>
+    <string name="connecting">連接中</string>
+    <string name="stopConnecting">停止連接</string>
+    <string name="ip">IP：</string>
+    <string name="defaultIp">140.112.148.175</string>
+    <!--<string name="defaultIp">192.168.0.193</string>-->
+    <!--<string name="defaultIp">120.126.65.69</string>-->
+    <string name="IPHint">請輸入伺服器IP</string>
+    <string name="start">開始</string>
+    <string name="stop">停止</string>
+    <string name="test">測試</string>
+    <string name="countdown">20</string>
+    <string name="alert">偵測到跌倒</string>
+    <string name="call">電話求救</string>
+    <string name="fine">我沒跌倒</string>
+    <!--設定相關-->
+    <string name="setting">設定</string>
+    <string name="set_none">無</string>
+    <string name="set_user">使用者資訊</string>
+    <string name="set_user_name">使用者名稱</string>
+    <string name="default_uuid">db69b1af-6cd4-4aae-9e44-4fe611808817</string>
+    <string name="set_user_name_new">新增使用者&#8230;</string>
+    <string name="set_user_data">跌倒歷史</string>
+    <string name="set_sms_title">緊急聯絡人資訊</string>
+    <string name="set_sms_number">聯絡人手機號碼</string>
+    <string name="set_sms_content">緊急簡訊內容</string>
+    <string name="set_sms_content_default">偵測到跌倒，請即刻回電，確認使用者狀態</string>
+    <string name="set_net_title">伺服器資訊</string>
+    <string name="set_net_IP">伺服器IP</string>
+    <string name="set_net_state">連線狀態</string>
+    <string name="set_net_state_description0">未連接  按一下即可連接</string>
+    <string-array name="set_net_state_description">
+        <item>未連接  按一下即可連接</item>
+        <item>連接中&#8230;</item>
+        <item>已連接</item>
+    </string-array>
+    <string name="name_input">請輸入名稱（</string>
+    <string name="name_update">修改名稱（</string>
+    <string name="name_limit">字以下）</string>
+
+    <string name="time">Time</string>
+    <string name="ax">Ax</string>
+    <string name="ay">Ay</string>
+    <string name="az">Az</string>
+    <string name="gx">Gx</string>
+    <string name="gy">Gy</string>
+    <string name="gz">Gz</string>
+    <string name="la">la</string>
+
+
+
+
+</resources>

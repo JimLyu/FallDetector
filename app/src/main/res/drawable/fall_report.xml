@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list
+    android:oneshot="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/fall_report1" android:duration="200" />
+    <item android:drawable="@drawable/fall_report2" android:duration="200" />
+    <item android:drawable="@drawable/fall_report3" android:duration="200" />
+    <item android:drawable="@drawable/fall_report4" android:duration="200" />
+    <item android:drawable="@drawable/fall_report5" android:duration="300" />
+
+
+</animation-list>

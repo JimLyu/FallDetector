@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen  xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="pref_key_user"
+        android:title="@string/set_user"
+        android:defaultValue="@string/default_uuid">
+        <Preference
+            android:key="pref_key_user_name"
+            android:title="@string/set_user_name"
+            android:summary="@string/blank"
+            android:defaultValue="@string/blank"/>
+        <Preference
+            android:key="pref_key_user_data"
+            android:title="@string/set_user_data"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="pref_key_net"
+        android:title="@string/set_net_title">
+        <Preference
+            android:key="pref_key_net_state"
+            android:title="@string/set_net_state"
+            android:summary="@string/set_net_state_description0"
+            android:defaultValue="0" />
+        <EditTextPreference
+            android:key="pref_key_net_IP"
+            android:title="@string/set_net_IP"
+            android:defaultValue="@string/defaultIp"
+            android:summary="@string/defaultIp" />
+            <!--android:enabled="false"-->
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="pref_key_sms"
+        android:title="@string/set_sms_title">
+        <EditTextPreference
+            android:key="pref_key_sms_number"
+            android:title="@string/set_sms_number"
+            android:summary="@string/set_none"
+            android:defaultValue="@string/blank"
+            android:inputType="phone"/>
+        <EditTextPreference
+            android:key="pref_key_sms_content"
+            android:title="@string/set_sms_content"
+            android:summary="@string/set_sms_content_default"
+            android:defaultValue="@string/set_sms_content_default" />
+    </PreferenceCategory>
+</PreferenceScreen>

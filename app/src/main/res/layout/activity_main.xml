@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:background="#00B199"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="jstudio.fallDetector.MainActivity">
+    <!--
+        藍：0091DA
+        綠：00B199-->
+
+    <ImageView
+        android:src="@drawable/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user"
+        android:id="@+id/IP"
+        android:textColor="@color/colorPrimary"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="84dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/userName"
+        android:textColor="@android:color/holo_blue_dark"
+        android:layout_alignBaseline="@+id/IP"
+        android:layout_alignBottom="@+id/IP"
+        android:layout_toEndOf="@+id/IP" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/defaultIp"
+        android:textColor="@color/colorPrimary"
+        android:ems="8"
+        android:hint="@string/IPHint"
+        android:id="@+id/address"
+        android:layout_alignBaseline="@+id/IP"
+        android:layout_alignBottom="@+id/IP"
+        android:layout_toEndOf="@+id/IP"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/disconnecting"
+        android:id="@+id/connectingState"
+        android:textColor="#FF0000"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/IP"
+        android:layout_toStartOf="@+id/settings" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/settings"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/connectingState"
+        android:layout_alignBottom="@id/connectingState"
+        android:src="@drawable/ic_perm_data_setting_black_24px"
+        android:background="@android:color/transparent" />
+
+    <ImageButton
+        android:src="@android:drawable/ic_lock_power_off"
+        android:layout_marginTop="50dp"
+        android:id="@+id/imageButton"
+        android:background="#FF0000"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_below="@+id/address"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone">
+    </ImageButton>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/mainWindow"
+        android:layout_below="@+id/connectingState"
+        android:layout_alignStart="@+id/imageButton"
+        android:layout_marginTop="14dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:text="@string/test"
+            android:textSize="24sp"
+            android:textColor="#FFFFFF"
+            android:background="#FF0000"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/button"
+            android:visibility="gone"/>
+
+        <ImageButton
+            android:src="@drawable/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:id="@+id/btnStart"
+            android:scaleType="centerInside"
+            style="@android:style/Widget.DeviceDefault.ImageButton"
+            android:background="@android:color/transparent" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/info"
+            android:text="@string/blank"
+            android:layout_below="@id/btnStart"
+            android:layout_centerHorizontal="true"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:id="@+id/animation"
+            android:layout_below="@+id/button"
+            android:layout_toEndOf="@+id/button">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="72dp"
+                android:id="@+id/countdown"
+                android:text="@string/countdown"
+                android:textSize="60sp"
+                android:textColor="#FF0000"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/plotScrollView"
+        android:layout_below="@id/mainWindow"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/chart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/plot">
+        </LinearLayout>
+
+    </HorizontalScrollView >
+
+</RelativeLayout>
