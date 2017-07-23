@@ -76,7 +76,14 @@
             android:layout_alignEnd="@+id/report"
             android:src="@mipmap/fall_ok"/>
 
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fallInfo"
+            android:text="@string/fallInfo_default"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="25dp"/>
 
     </RelativeLayout>
 

@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.hardware.input.InputManager;
 import android.os.Message;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
@@ -34,7 +35,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     static final String USER_NAME = "pref_key_user_name";
     static final String USER_UUID = "pref_key_user";
-    static final String USER_DATA = "pref_key_user_data";
+    static final String USER_THEME = "pref_key_user_theme";
     static final String NET = "pref_key_net";
     static final String NET_STATE = "pref_key_net_state";
     static final String NET_IP = "pref_key_net_IP";
@@ -69,7 +70,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-           updateSummary();//一次重整全部
+            updateSummary(); //一次重整全部
         }
 
         @Override
@@ -114,13 +115,6 @@ public class SettingsActivity extends AppCompatActivity {
                     return false;
                 }
             });
-            findPreference(USER_DATA).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    startActivity(new Intent().setClass(getActivity(), SQLiteActivity.class));
-                    return false;
-                }
-            });
         }
 
         @Override
@@ -134,9 +128,8 @@ public class SettingsActivity extends AppCompatActivity {
                 Preference p = findPreference(UPDATE[i]);
                 p.setSummary(getPreferenceManager().getSharedPreferences().getString(UPDATE[i], ""));
             }
-//            Map<String, ?> allEntries = getPreferenceManager().getSharedPreferences().getAll();
-//            for (Map.Entry<String, ?> entry : allEntries.entrySet())
-//                findPreference(entry.getKey()).setSummary(entry.getValue().toString());
+            ListPreference theme = (ListPreference)findPreference(USER_THEME);
+            theme.setSummary(theme.getEntry());
             changeStateColor();
         }
 

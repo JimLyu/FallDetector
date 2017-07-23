@@ -90,7 +90,6 @@ public class MainActivity extends Activity {
     Vibrator vibrator;
     boolean falling = false; //FallActivity是否正在執行
 //    long tempTime = 0;
-
     private PowerManager.WakeLock mWakeLock;
 
     @Override
@@ -101,6 +100,7 @@ public class MainActivity extends Activity {
         loadUser();
         connect();
         settings.edit().remove(SettingsActivity.NET_STATE).apply();
+        changeBackgroundColor();
 //        settings.edit().clear().apply();//清除設定
     }
 
@@ -139,12 +139,19 @@ public class MainActivity extends Activity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
+        changeBackgroundColor();
         falling = false;
         String time = String.valueOf(intent.getLongExtra("time", 0));
         boolean fall = intent.getBooleanExtra("fall", false);
         if(fall)//求救
             sendSMS();
         new MsgSendThread("/return " + time  + " " + fall).start();//回報
+    }
+
+    private void changeBackgroundColor(){
+        String colorString = PreferenceManager.getDefaultSharedPreferences(this).getString(SettingsActivity.USER_THEME,
+                getResources().getStringArray(R.array.set_user_theme_value)[0]);
+        findViewById(R.id.activity_main).setBackgroundColor(Color.parseColor(colorString));
     }
 
     private void initialize() {
@@ -157,7 +164,7 @@ public class MainActivity extends Activity {
         acSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         gvSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
         btnStart = (ImageButton) findViewById(R.id.btnStart);
-        btnStart.setOnClickListener(lsrStart);
+        btnStart.setOnClickListener(lsrDisable);
         handler = new MainHandler();
         linearAcceleration = new float[3];
         gravity = new float[3];
@@ -381,7 +388,25 @@ public class MainActivity extends Activity {
         txtConnectionState.setText(R.string.disconnecting);
         txtConnectionState.setTextColor(Color.RED);
     }
+    /*連線Listener*/
+    View.OnClickListener lsrDisable = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(MainActivity.this, "無網路連線，請等連線成功後再試一次", Toast.LENGTH_LONG).show();
+            connect();
+        }
+    };
+    /*啟動Listener*/
+    View.OnClickListener lsrStart = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            mWakeLock.acquire();//電力控制
 
+            registerListeners();
+            btnStart.setImageResource(R.drawable.btn_stop);
+            btnStart.setOnClickListener(ltrStop);
+        }
+    };
     /*停止Listener*/
     View.OnClickListener ltrStop = new View.OnClickListener() {
         @Override
@@ -389,19 +414,8 @@ public class MainActivity extends Activity {
             mWakeLock.release();
 
             unregisterListeners();
-            btnStart.setImageDrawable(getResources().getDrawable(R.drawable.start));
+            btnStart.setImageResource(R.drawable.btn_start);
             btnStart.setOnClickListener(lsrStart);
-        }
-    };
-        /*啟動Listener*/
-    View.OnClickListener lsrStart = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            mWakeLock.acquire();//電力控制
-
-            registerListeners();
-            btnStart.setImageDrawable(getResources().getDrawable(R.drawable.stop));
-            btnStart.setOnClickListener(ltrStop);
         }
     };
 
@@ -864,6 +878,7 @@ public class MainActivity extends Activity {
                     msgAcceptThread.start();
                     log("開啟MsgAcceptThread");
                     MainHandler.this.post(upload);
+                    btnStart.setOnClickListener(lsrStart);
                 case CONNECTING:
                 case DISCONNECT:
                     changeState(msg.what);

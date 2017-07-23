@@ -9,9 +9,11 @@
             android:title="@string/set_user_name"
             android:summary="@string/blank"
             android:defaultValue="@string/blank"/>
-        <Preference
-            android:key="pref_key_user_data"
-            android:title="@string/set_user_data"/>
+        <ListPreference
+            android:key="pref_key_user_theme"
+            android:title="@string/set_user_theme"
+            android:entries="@array/set_user_theme_list"
+            android:entryValues="@array/set_user_theme_value" />
     </PreferenceCategory>
     <PreferenceCategory
         android:key="pref_key_net"

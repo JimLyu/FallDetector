@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="set_user_theme_list">
+        <item>藍（預設）</item>
+        <item>綠</item>
+    </string-array>
+    <string-array name="set_user_theme_value">
+        <item>#0091DA</item>
+        <item>#00B199</item>
+    </string-array>
+</resources>

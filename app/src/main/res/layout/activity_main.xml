@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
-    android:background="#00B199"
+    android:background="#0091DA"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -13,8 +13,9 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="jstudio.fallDetector.MainActivity">
     <!--
-        藍：0091DA
-        綠：00B199-->
+        藍：#0091DA    00 145 218
+        綠：#00B199    00 177 153
+    -->
 
     <ImageView
         android:src="@drawable/title"
@@ -94,8 +95,7 @@
         android:layout_height="200dp"
         android:id="@+id/mainWindow"
         android:layout_below="@+id/connectingState"
-        android:layout_alignStart="@+id/imageButton"
-        android:layout_marginTop="14dp">
+        android:layout_alignParentEnd="true">
 
         <Button
             android:layout_width="wrap_content"
@@ -110,44 +110,24 @@
             android:visibility="gone"/>
 
         <ImageButton
-            android:src="@drawable/start"
+            android:id="@+id/btnStart"
+            style="@android:style/Widget.DeviceDefault.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
-            android:id="@+id/btnStart"
-            android:scaleType="centerInside"
-            style="@android:style/Widget.DeviceDefault.ImageButton"
-            android:background="@android:color/transparent" />
+            android:src="@drawable/btn_disable"
+            android:background="@android:color/transparent"/>
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/info"
-            android:text="@string/blank"
+            android:text="@string/btnDisable"
             android:layout_below="@id/btnStart"
-            android:layout_centerHorizontal="true"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:id="@+id/animation"
-            android:layout_below="@+id/button"
-            android:layout_toEndOf="@+id/button">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="72dp"
-                android:id="@+id/countdown"
-                android:text="@string/countdown"
-                android:textSize="60sp"
-                android:textColor="#FF0000"
-                android:visibility="gone"/>
-
-        </RelativeLayout>
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"/>
 
     </RelativeLayout>
 
