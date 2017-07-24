@@ -79,7 +79,7 @@ public class MainActivity extends Activity {
     SensorEventListener acListener, gvListener;
     String serverSays = "";
     ImageButton btnStart;
-    TextView txtConnectionState;
+    TextView txtConnectionState, txtButtonInfo;
     AbstractMap.SimpleEntry<Long, Float> acceleration;
     float highest_ac = 0;                    // G的倍數
     float[] linearAcceleration, gravity;    // m/s2
@@ -176,6 +176,7 @@ public class MainActivity extends Activity {
                 connect();
             }
         });
+        txtButtonInfo = (TextView) findViewById(R.id.info);
 //        dataRecordThread = new DataRecordThread();
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         sqlRecordThread = new SQLRecordThread();
@@ -392,7 +393,7 @@ public class MainActivity extends Activity {
     View.OnClickListener lsrDisable = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Toast.makeText(MainActivity.this, "無網路連線，請等連線成功後再試一次", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "無網路連線，請等連線成功後再試一次", Toast.LENGTH_SHORT).show();
             connect();
         }
     };
@@ -404,11 +405,11 @@ public class MainActivity extends Activity {
 
             registerListeners();
             btnStart.setImageResource(R.drawable.btn_stop);
-            btnStart.setOnClickListener(ltrStop);
+            btnStart.setOnClickListener(lsrStop);
         }
     };
     /*停止Listener*/
-    View.OnClickListener ltrStop = new View.OnClickListener() {
+    View.OnClickListener lsrStop = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             mWakeLock.release();
@@ -878,7 +879,7 @@ public class MainActivity extends Activity {
                     msgAcceptThread.start();
                     log("開啟MsgAcceptThread");
                     MainHandler.this.post(upload);
-                    btnStart.setOnClickListener(lsrStart);
+                    changeButtonState(true);
                 case CONNECTING:
                 case DISCONNECT:
                     changeState(msg.what);
@@ -900,5 +901,17 @@ public class MainActivity extends Activity {
                 MainHandler.this.postDelayed(this, UPLOAD_CD);  //無論如何都先預約一次
             }
         };
+
+        void changeButtonState(boolean enable){
+            if(enable){
+                btnStart.setImageResource(R.drawable.btn_start);
+                btnStart.setOnClickListener(lsrStart);
+                txtButtonInfo.setText(getResources().getString(R.string.btnStart));
+            }else{
+                btnStart.setImageResource(R.drawable.btn_disable);
+                btnStart.setOnClickListener(lsrDisable);
+                txtButtonInfo.setText(getResources().getString(R.string.btnDisable));
+            }
+        }
     }
 }

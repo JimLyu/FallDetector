@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/user"
-        android:id="@+id/IP"
+        android:id="@+id/userName_caption"
         android:textColor="@color/colorPrimary"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_alignParentTop="true"
@@ -40,23 +40,10 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/userName"
-        android:textColor="@android:color/holo_blue_dark"
-        android:layout_alignBaseline="@+id/IP"
-        android:layout_alignBottom="@+id/IP"
-        android:layout_toEndOf="@+id/IP" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/defaultIp"
-        android:textColor="@color/colorPrimary"
-        android:ems="8"
-        android:hint="@string/IPHint"
-        android:id="@+id/address"
-        android:layout_alignBaseline="@+id/IP"
-        android:layout_alignBottom="@+id/IP"
-        android:layout_toEndOf="@+id/IP"
-        android:visibility="gone"/>
+        android:textColor="@android:color/white"
+        android:layout_alignBaseline="@+id/userName_caption"
+        android:layout_alignBottom="@+id/userName_caption"
+        android:layout_toEndOf="@+id/userName_caption" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -64,8 +51,8 @@
         android:text="@string/disconnecting"
         android:id="@+id/connectingState"
         android:textColor="#FF0000"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_below="@+id/IP"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginTop="72dp"
         android:layout_toStartOf="@+id/settings" />
 
     <ImageButton
@@ -76,25 +63,14 @@
         android:layout_alignTop="@id/connectingState"
         android:layout_alignBottom="@id/connectingState"
         android:src="@drawable/ic_perm_data_setting_black_24px"
+        android:scaleType="centerInside"
         android:background="@android:color/transparent" />
-
-    <ImageButton
-        android:src="@android:drawable/ic_lock_power_off"
-        android:layout_marginTop="50dp"
-        android:id="@+id/imageButton"
-        android:background="#FF0000"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_below="@+id/address"
-        android:layout_centerHorizontal="true"
-        android:visibility="gone">
-    </ImageButton>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:id="@+id/mainWindow"
-        android:layout_below="@+id/connectingState"
+        android:layout_below="@+id/userName_caption"
         android:layout_alignParentEnd="true">
 
         <Button

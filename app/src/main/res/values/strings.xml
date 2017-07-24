@@ -15,7 +15,7 @@
     <!--<string name="defaultIp">120.126.65.69</string>-->
     <string name="IPHint">請輸入伺服器IP</string>
     <string name="start">開始</string>
-    <string name="btnDisable">無網路連線</string>
+    <string name="btnDisable">未連接</string>
     <string name="btnStart">按一下開始偵測</string>
     <string name="btnStop">偵測中 按一下停止</string>
     <string name="stop">停止</string>
@@ -34,7 +34,8 @@
     <string name="set_user_name_new">新增使用者&#8230;</string>
     <string name="set_user_data">跌倒歷史</string>
     <string name="set_user_theme">主題</string>
-    <string name="set_user_theme_default">青（預設）</string>
+    <string name="set_user_theme_default">藍（預設）</string>
+    <string name="set_user_theme_default_value">#0091DA</string>
     <string name="set_sms_title">緊急聯絡人資訊</string>
     <string name="set_sms_number">聯絡人手機號碼</string>
     <string name="set_sms_content">緊急簡訊內容</string>

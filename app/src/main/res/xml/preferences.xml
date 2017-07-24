@@ -13,7 +13,8 @@
             android:key="pref_key_user_theme"
             android:title="@string/set_user_theme"
             android:entries="@array/set_user_theme_list"
-            android:entryValues="@array/set_user_theme_value" />
+            android:entryValues="@array/set_user_theme_value"
+            android:defaultValue="@string/set_user_theme_default_value"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:key="pref_key_net"
