@@ -98,8 +98,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         initialize();
         loadUser();
-        connect();
         settings.edit().remove(SettingsActivity.NET_STATE).apply();
+        connect();
         changeBackgroundColor();
 //        settings.edit().clear().apply();//清除設定
     }
@@ -406,6 +406,7 @@ public class MainActivity extends Activity {
             registerListeners();
             btnStart.setImageResource(R.drawable.btn_stop);
             btnStart.setOnClickListener(lsrStop);
+            txtButtonInfo.setText(getResources().getString(R.string.btnStop));
         }
     };
     /*停止Listener*/
@@ -417,6 +418,7 @@ public class MainActivity extends Activity {
             unregisterListeners();
             btnStart.setImageResource(R.drawable.btn_start);
             btnStart.setOnClickListener(lsrStart);
+            txtButtonInfo.setText(getResources().getString(R.string.btnStart));
         }
     };
 
@@ -468,7 +470,7 @@ public class MainActivity extends Activity {
                 paint[i].setStrokeWidth(3);
             }
             paint[0].setColor(Color.RED);
-            paint[1].setColor(Color.CYAN);  //#00FFFF 藍綠色
+            paint[1].setColor(Color.GREEN);
             paint[2].setColor(Color.LTGRAY);
             paint[3].setColor(Color.TRANSPARENT);
             paint[4].setColor(Color.WHITE);
@@ -614,6 +616,7 @@ public class MainActivity extends Activity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    handler.changeButtonState(false);
                     changeState(0);
 //                    Toast.makeText(MainActivity.this, "失去連線", Toast.LENGTH_SHORT).show();
                     closeSocket();
