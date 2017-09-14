@@ -34,6 +34,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,6 +56,7 @@ import java.util.UUID;
 
 public class MainActivity extends Activity {
 
+    private final boolean DEBUG = true;
     private final String DEFAULT_UUID = "db69b1af-6cd4-4aae-9e44-4fe611808817";
     private final int NOTIFICATION_SERVICE_ID = 40;
     private final int UPLOAD_CD = 60*1000;   //每60秒上傳一次
@@ -164,7 +166,8 @@ public class MainActivity extends Activity {
         acSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         gvSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
         btnStart = (ImageButton) findViewById(R.id.btnStart);
-        btnStart.setOnClickListener(lsrDisable);
+        btnStart.setOnClickListener((DEBUG)?lsrStart:lsrDisable);
+        btnStart.setImageResource((DEBUG)?R.drawable.btn_start2:R.drawable.btn_disable2);
         handler = new MainHandler();
         linearAcceleration = new float[3];
         gravity = new float[3];
@@ -184,10 +187,18 @@ public class MainActivity extends Activity {
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent().setClass(MainActivity.this, FallActivity.class));
-//                sendSMS();
-                String s = PreferenceManager.getDefaultSharedPreferences(MainActivity.this).getString(SettingsActivity.USER_UUID, "");
-                Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+                if(!falling){
+                    falling = true;
+                    startActivity(new Intent().setClass(MainActivity.this, FallActivity.class).putExtra("time", System.currentTimeMillis()));
+                }
+            }
+        });
+        ImageView title = (ImageView) findViewById(R.id.title);
+        title.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                startActivity(new Intent().setClass(MainActivity.this, FallActivity.class));//問卷用
+                return false;
             }
         });
         ImageButton imageButton = (ImageButton) findViewById(R.id.settings);
@@ -404,7 +415,7 @@ public class MainActivity extends Activity {
             mWakeLock.acquire();//電力控制
 
             registerListeners();
-            btnStart.setImageResource(R.drawable.btn_stop);
+            btnStart.setImageResource(R.drawable.btn_stop2);
             btnStart.setOnClickListener(lsrStop);
             txtButtonInfo.setText(getResources().getString(R.string.btnStop));
         }
@@ -416,7 +427,7 @@ public class MainActivity extends Activity {
             mWakeLock.release();
 
             unregisterListeners();
-            btnStart.setImageResource(R.drawable.btn_start);
+            btnStart.setImageResource(R.drawable.btn_start2);
             btnStart.setOnClickListener(lsrStart);
             txtButtonInfo.setText(getResources().getString(R.string.btnStart));
         }
@@ -570,25 +581,35 @@ public class MainActivity extends Activity {
 
     /*Msg接收Thread*/
     private class MsgAcceptThread extends Thread {
+        private final long TIMEOUT = 10000L; //斷線timeout
         String buffer = null;
+        long tRead = 0;
         MsgAcceptThread() {
             super();
         }
+
         @Override
         public void run() {
             try {
                 while (tcpSocket != null) {
                     buffer = new BufferedReader(new InputStreamReader(tcpSocket.getInputStream())).readLine();
                     if (buffer != null) {
+                        tRead = 0;
                         log("Server says: " + buffer);
                         serverSays = buffer;
                         interpreter(buffer.split("\\s"));
-                    } else {
-                        disConnected();
-                        break;
+                    }else{
+                        log("accept null!");
+                        if(tRead == 0){//第一次收到NULL
+                            tRead = System.currentTimeMillis();
+                        }else if(System.currentTimeMillis() - tRead > TIMEOUT)
+                            break;
                     }
+
                 }
             } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
                 disConnected();
             }
         }
@@ -674,7 +695,11 @@ public class MainActivity extends Activity {
                                     falling_state = 0;//Falling! 繼續判斷
                                     highest_ac = 0;
                                     uploadingFallTime.add(fallTime);
-//                                    startActivity(new Intent().setClass(MainActivity.this, FallActivity.class));
+                                    //問卷
+                                    if(!falling){
+                                        falling = true;
+                                        startActivity(new Intent().setClass(MainActivity.this, FallActivity.class).putExtra("time", System.currentTimeMillis()));
+                                    }
                                 }
                             }
                             break;
@@ -907,11 +932,11 @@ public class MainActivity extends Activity {
 
         void changeButtonState(boolean enable){
             if(enable){
-                btnStart.setImageResource(R.drawable.btn_start);
+                btnStart.setImageResource(R.drawable.btn_start2);
                 btnStart.setOnClickListener(lsrStart);
                 txtButtonInfo.setText(getResources().getString(R.string.btnStart));
             }else{
-                btnStart.setImageResource(R.drawable.btn_disable);
+                btnStart.setImageResource(R.drawable.btn_disable2);
                 btnStart.setOnClickListener(lsrDisable);
                 txtButtonInfo.setText(getResources().getString(R.string.btnDisable));
             }

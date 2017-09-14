@@ -74,7 +74,7 @@ public class FallActivity extends Activity {
 
         fallCountdown = (TextView) findViewById(R.id.fallCountdown);
 
-        vibrator.vibrate(countdown * 1000);
+//        vibrator.vibrate(countdown * 1000);
 
         new Thread(new Runnable() {
             long time = System.currentTimeMillis();
